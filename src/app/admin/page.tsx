@@ -141,7 +141,7 @@ export default function AdminPage() {
           <label>Event Date:</label>
           <input
             type="date"
-            name="event_date"
+            name="date"
             value={scheduleData.date}
             onChange={handleInputChange}
             style={{ width: "100%", padding: "0.5rem", marginTop: "0.25rem" }}
