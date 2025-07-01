@@ -3,17 +3,36 @@ import { useState, FormEvent, ChangeEvent } from "react";
 
 interface ScheduleData {
   title: string;
+  event_type: string;
   description: string;
+  date: string;
   start_time: string;
   end_time: string;
   day_of_week: string;
   is_recurring: boolean;
 }
 
+const EVENT_TYPES = [
+  { value: "tournament", label: "Tournament" },
+  { value: "open_gym", label: "Open Gym" },
+];
+
+const DAYS_OF_WEEK = [
+  { value: "Monday", label: "Monday" },
+  { value: "Tuesday", label: "Tuesday" },
+  { value: "Wednesday", label: "Wednesday" },
+  { value: "Thursday", label: "Thursday" },
+  { value: "Friday", label: "Friday" },
+  { value: "Saturday", label: "Saturday" },
+  { value: "Sunday", label: "Sunday" },
+];
+
 export default function AdminPage() {
   const [scheduleData, setScheduleData] = useState<ScheduleData>({
     title: "",
+    event_type: "",
     description: "",
+    date: "",
     start_time: "",
     end_time: "",
     day_of_week: "",
@@ -37,7 +56,9 @@ export default function AdminPage() {
         // Reset form
         setScheduleData({
           title: "",
+          event_type: "",
           description: "",
+          date: "",
           start_time: "",
           end_time: "",
           day_of_week: "",
@@ -84,6 +105,24 @@ export default function AdminPage() {
         </div>
 
         <div style={{ marginBottom: "1rem" }}>
+          <label>Event Type:</label>
+          <select
+            name="event_type"
+            value={scheduleData.event_type}
+            onChange={handleInputChange}
+            required
+            style={{ width: "100%", padding: "0.5rem", marginTop: "0.25rem" }}
+          >
+            <option value="">Select event type</option>
+            {EVENT_TYPES.map((type) => (
+              <option key={type.value} value={type.value}>
+                {type.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div style={{ marginBottom: "1rem" }}>
           <label>Description:</label>
           <textarea
             name="description"
@@ -99,9 +138,20 @@ export default function AdminPage() {
         </div>
 
         <div style={{ marginBottom: "1rem" }}>
+          <label>Event Date:</label>
+          <input
+            type="date"
+            name="event_date"
+            value={scheduleData.date}
+            onChange={handleInputChange}
+            style={{ width: "100%", padding: "0.5rem", marginTop: "0.25rem" }}
+          />
+        </div>
+
+        <div style={{ marginBottom: "1rem" }}>
           <label>Start Time:</label>
           <input
-            type="datetime-local"
+            type="time"
             name="start_time"
             value={scheduleData.start_time}
             onChange={handleInputChange}
@@ -112,7 +162,7 @@ export default function AdminPage() {
         <div style={{ marginBottom: "1rem" }}>
           <label>End Time:</label>
           <input
-            type="datetime-local"
+            type="time"
             name="end_time"
             value={scheduleData.end_time}
             onChange={handleInputChange}
@@ -129,13 +179,11 @@ export default function AdminPage() {
             style={{ width: "100%", padding: "0.5rem", marginTop: "0.25rem" }}
           >
             <option value="">Select day</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
+            {DAYS_OF_WEEK.map((day) => (
+              <option key={day.value} value={day.value}>
+                {day.label}
+              </option>
+            ))}
           </select>
         </div>
 

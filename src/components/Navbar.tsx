@@ -57,19 +57,8 @@ export default function Navbar() {
       },
       {
         label: "Schedule",
-        href: "", // Empty string instead of null
-        dropdown: {
-          items: [
-            {
-              label: "Events/Tournaments",
-              href: "/schedule/events",
-            },
-            {
-              label: "Open Gyms",
-              href: "/schedule/open-gyms",
-            },
-          ],
-        },
+        href: "/schedule", // Empty string instead of null
+        dropdown: null,
       },
       {
         label: "Gallery",
